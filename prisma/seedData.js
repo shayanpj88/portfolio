@@ -50,9 +50,11 @@ module.exports = {
       "slug": "demonomy",
       "htmlContent": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, omnis. Saepe hic officia, dolore illo eum error labore! Placeat, repudiandae. Molestias eius, beatae ex impedit itaque quas sapiente? Suscipit, dolorem?",
       "featureImage": "/images/image-1.jpg",
+      "startedAt": "2019-06-19T22:21:31.395Z",
+      "endedAt": null,
       "authorId": "cmbpl7pa10000w41sijiw9igk",
       "createdAt": "2025-06-19T22:21:31.395Z",
-      "updatedAt": "2025-06-21T17:42:06.799Z"
+      "updatedAt": "2025-06-21T20:44:57.418Z"
     },
     {
       "id": "cmc3yagae0003w4rqdsna0i4u",
@@ -61,9 +63,11 @@ module.exports = {
       "slug": "sahartv",
       "htmlContent": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, omnis. Saepe hic officia, dolore illo eum error labore! Placeat, repudiandae. Molestias eius, beatae ex impedit itaque quas sapiente? Suscipit, dolorem?",
       "featureImage": "/images/image-2.jpg",
+      "startedAt": "2010-06-19T22:21:31.395Z",
+      "endedAt": "2024-06-19T22:21:31.395Z",
       "authorId": "cmbpl7pa10000w41sijiw9igk",
       "createdAt": "2025-06-19T22:26:31.286Z",
-      "updatedAt": "2025-06-21T17:43:18.843Z"
+      "updatedAt": "2025-06-21T20:44:57.418Z"
     }
   ]
 };

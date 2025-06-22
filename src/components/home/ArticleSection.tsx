@@ -15,7 +15,11 @@ export default async function ArticleSection() {
         >
           <Link href={`articles/${article?.slug}`} className="flex flex-col">
             <p className="border-l-1 order-first flex items-center text-sm text-zinc-400 pl-3.5">
-              September 2, 2020
+              {new Date(article.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </p>
             <h2 className="mt-4 text-zinc-900 dark:text-zinc-100">
               {article?.title}
