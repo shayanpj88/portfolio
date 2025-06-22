@@ -1,5 +1,3 @@
-//import EditProfileForm from "@/components/profile/EditProfileForm";
-//import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { notFound, redirect } from "next/navigation";

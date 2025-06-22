@@ -13,17 +13,20 @@ export async function PUT(req: NextRequest) {
 
     const body = await req.json();
 
-    const updatedArticle = await prisma.article.update({
+    const updatedProject = await prisma.project.update({
       where: { id: body.id },
       data: {
         title: body.title,
         slug: createSlug(body.title),
+        role: body.role,
+        startedAt: body.startedAt,
+        endedAt: body.endedAt,
         htmlContent: body.htmlContent,
         featureImage: body.featureImage,
       },
     });
 
-    return NextResponse.json(updatedArticle);
+    return NextResponse.json(updatedProject);
   } catch (error) {
     console.error("Update Error:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
@@ -39,17 +42,20 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
-    const newArticle = await prisma.article.create({
+    const newProject = await prisma.project.create({
       data: {
         title: body.title,
         slug: createSlug(body.title),
+        role: body.role,
+        startedAt: body.startedAt,
+        endedAt: body.endedAt,
         htmlContent: body.htmlContent,
         featureImage: body.featureImage,
         authorId: session.user.id,
       },
     });
 
-    return NextResponse.json(newArticle);
+    return NextResponse.json(newProject);
   } catch (error) {
     console.error("Update Error:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
