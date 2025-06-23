@@ -89,6 +89,18 @@ export default function EditArticleForm({ article, mode }: Props) {
           )}
         </div>
 
+        {/* description */}    
+        <div>
+          <label className="block font-medium">Description</label>
+          <textarea
+            name="description"
+            value={formData.description ?? ""}
+            onChange={handleChange}
+            className="mt-1 w-full rounded border px-3 py-2"
+            rows={3}
+          />
+        </div>
+
         {/* htmlContent */}
         <div>
           <label className="block font-medium">Content</label>
@@ -133,7 +145,7 @@ export default function EditArticleForm({ article, mode }: Props) {
           >
             {status === "submitting" ? "Saving..." : "Save"}
           </button>
-          {(status === "success" || isCreated === true ) && (
+          {(status === "success" || isCreated === true) && (
             <p className="mt-2 text-green-500">Article saved successfully!</p>
           )}
           {status === "error" && (

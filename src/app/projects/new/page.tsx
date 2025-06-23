@@ -17,6 +17,7 @@ export default async function ArticleEditPage({ params }: any) {
     id: "",
     title:  "",
     slug: "",
+    description: "",
     role: "",
     startedAt: null,
     endedAt: null,

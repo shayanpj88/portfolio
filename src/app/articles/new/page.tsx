@@ -17,6 +17,7 @@ export default async function ArticleEditPage({ params }: any) {
     id: "",
     title: "",
     slug: "",
+    description: "",
     htmlContent: "",
     featureImage: "",
     authorId: "",

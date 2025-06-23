@@ -32,6 +32,7 @@ model Article {
   id           String  @id @default(cuid())
   title        String
   slug         String  @unique
+  description  String?
   htmlContent  String
   featureImage String?
 
@@ -47,6 +48,7 @@ model Project {
   title        String
   role         String
   slug         String  @unique
+  description  String?
   htmlContent  String
   featureImage String?
 

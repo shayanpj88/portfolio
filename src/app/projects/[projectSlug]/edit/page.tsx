@@ -22,6 +22,7 @@ export default async function ProjectEditPage({ params }: any) {
     id: project.id,
     title: project.title,
     slug: project.slug,
+    description: project.description ?? "",
     role: project.role,
     startedAt: project.startedAt ?? null,
     endedAt: project.endedAt ?? null,
@@ -33,7 +34,7 @@ export default async function ProjectEditPage({ params }: any) {
   return (
     <section id="project-form" className="px-6 md:px-16 md:py-6">
       <SectionHeader title="Edit Project" />
-      <EditProjectForm project={projectFormData} mode="edit"/>
+      <EditProjectForm project={projectFormData} mode="edit" />
     </section>
   );
 }

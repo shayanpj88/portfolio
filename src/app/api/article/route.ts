@@ -18,6 +18,7 @@ export async function PUT(req: NextRequest) {
       data: {
         title: body.title,
         slug: createSlug(body.title),
+        description: body.description,
         htmlContent: body.htmlContent,
         featureImage: body.featureImage,
       },
@@ -44,6 +45,7 @@ export async function POST(req: NextRequest) {
         title: body.title,
         slug: createSlug(body.title),
         htmlContent: body.htmlContent,
+        description: body.description,
         featureImage: body.featureImage,
         authorId: session.user.id,
       },

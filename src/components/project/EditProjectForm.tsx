@@ -82,6 +82,18 @@ export default function EditProjectForm({ project, mode }: Props) {
           )}
         </div>
 
+        {/* Description */}
+        <div>
+          <label className="block font-medium">Description</label>
+          <textarea
+            name="description"
+            value={formData.description ?? ""}
+            onChange={handleChange}
+            className="mt-1 w-full rounded border px-3 py-2"
+            rows={3}
+          />
+        </div>
+
         {/* Role */}
         <div>
           <label className="block font-medium">Role</label>
@@ -101,7 +113,11 @@ export default function EditProjectForm({ project, mode }: Props) {
           <input
             name="startedAt"
             type="date"
-            value={formData.startedAt?.toDateString() ?? ""}
+            value={
+              formData.startedAt
+                ? new Date(formData.startedAt).toISOString().split("T")[0]
+                : ""
+            }
             onChange={handleChange}
             className="mt-1 w-full rounded border px-3 py-2"
           />
@@ -116,7 +132,11 @@ export default function EditProjectForm({ project, mode }: Props) {
           <input
             name="endedAt"
             type="date"
-            value={formData.startedAt?.toDateString() ?? ""}
+            value={
+              formData.endedAt
+                ? new Date(formData.endedAt).toISOString().split("T")[0]
+                : ""
+            }
             onChange={handleChange}
             className="mt-1 w-full rounded border px-3 py-2"
           />
