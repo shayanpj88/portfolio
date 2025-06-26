@@ -1,1 +1,1 @@
-export type NavModes = "header" | "footer" | "mobile";
+export type NavModes = "desktop" | "footer" | "mobile";

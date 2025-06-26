@@ -2,13 +2,14 @@ import EditProfileForm from "@/components/profile/EditProfileForm";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.email) {
-    redirect("/login"); // secure redirect if not logged in
+  if (!session) {
+    redirect("/auth/login");
   }
 
   const user = await prisma.user.findUnique({
@@ -16,7 +17,7 @@ export default async function ProfilePage() {
   });
 
   if (!user) {
-    return <div>User not found.</div>;
+    notFound();
   }
 
   const userFormData = {
@@ -29,22 +30,17 @@ export default async function ProfilePage() {
     introductionTitle: user.introductionTitle ?? "",
     introductionSummary: user.introductionSummary ?? "",
     profileImage: user.profileImage ?? "",
-    social: user.social ?? {}, 
+    social: user.social ?? {},
   };
 
   return (
-      <section
-      id="profile"
-      className="max-w-2xl px-6 md:px-16 md:py-16 lg:max-w-5xl"
-    >
-      <header className="max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-          Profile
-        </h1>
-      </header>
-      <EditProfileForm user={userFormData} />
-    </section>
-  
+    <>
+      <div className="flex flex-col items-start mx-auto max-w-2xl mb-20 md:mb-28">
+        <SectionHeader title="Profile" />
+        <section id="project-form" className="px-6 md:px-16 w-full">
+          <EditProfileForm user={userFormData} />{" "}
+        </section>
+      </div>
+    </>
   );
 }
-

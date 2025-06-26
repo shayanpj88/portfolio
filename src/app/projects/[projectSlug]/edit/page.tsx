@@ -5,14 +5,19 @@ import { getProject } from "@/lib/prisma/project";
 import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
 import EditProjectForm from "@/components/project/EditProjectForm";
 
-export default async function ProjectEditPage({ params }: any) {
+interface Props {
+  params: { projectSlug: string };
+} 
+
+export default async function ProjectEditPage({ params }: Props) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/login"); // secure redirect if not logged in
+    redirect("auth/login");
   }
 
-  const project = await getProject(params.projectSlug);
+  const {projectSlug} = await params;
+  const project = await getProject(projectSlug);
 
   if (!project) {
     notFound();
@@ -24,6 +29,7 @@ export default async function ProjectEditPage({ params }: any) {
     slug: project.slug,
     description: project.description ?? "",
     role: project.role,
+    projectUrl: project.projectUrl ?? "",
     startedAt: project.startedAt ?? null,
     endedAt: project.endedAt ?? null,
     htmlContent: project.htmlContent ?? "",
@@ -32,9 +38,11 @@ export default async function ProjectEditPage({ params }: any) {
   };
 
   return (
-    <section id="project-form" className="px-6 md:px-16 md:py-6">
+    <div className="flex flex-col items-start mx-auto max-w-2xl mb-20 md:mb-28">
       <SectionHeader title="Edit Project" />
-      <EditProjectForm project={projectFormData} mode="edit" />
-    </section>
+      <section id="project-form" className="px-6 md:px-16 w-full">
+        <EditProjectForm project={projectFormData} mode="edit" />
+      </section>
+    </div>
   );
 }

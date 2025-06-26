@@ -24,9 +24,11 @@ export default async function ArticleEditPage({ params }: any) {
   };
 
   return (
-    <section id="article-form" className="px-6 md:px-16 md:py-6">
+    <div className="flex flex-col items-start mx-auto max-w-2xl mb-20 md:mb-28">
       <SectionHeader title="New Article" />
-      <EditArticleForm article={articleFormData} mode="new"/>
-    </section>
+      <section id="article-form" className="px-6 md:px-16 w-full">
+        <EditArticleForm article={articleFormData} mode="new" />
+      </section>
+    </div>
   );
 }

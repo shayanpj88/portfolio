@@ -6,10 +6,13 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
+import { ChevronRight } from "lucide-react";
+import { ArticleDateFormatter } from "@/util/DateFormatter";
 
 //add dynamic metadata
 export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const project = await getProject(params.projectSlug);
+  const { projectSlug } = await params;
+  const project = await getProject(projectSlug);
 
   if (!project) {
     notFound();
@@ -30,8 +33,13 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   };
 }
 
-export default async function ProjectPage({ params }: any) {
-  const project = await getProject(params.projectSlug);
+export default async function ProjectPage({
+  params,
+}: {
+  params: { projectSlug: string };
+}) {
+  const { projectSlug } = await params;
+  const project = await getProject(projectSlug);
 
   if (!project) {
     notFound();
@@ -42,25 +50,44 @@ export default async function ProjectPage({ params }: any) {
   project.htmlContent = project?.htmlContent.replace(/\n/g, "<br />");
 
   return (
-    <section id="about" className="px-6 md:px-16 md:py-6">
-      <SectionHeader title={project.title} />
-      <div className="flex flex-col gap-6">
-        <Image
-          width={728}
-          height={486}
-          src={project.featureImage || "/iamges/project.jpg"}
-          alt={project.title}
-        />
-        <p className=" text-zinc-600 dark:text-zinc-400">
-          {project.htmlContent}
-        </p>
-        <p className=" flex gap-3  text-zinc-600 dark:text-zinc-400">
-          <span>{project.createdAt.toDateString()} </span>
+    <div className="flex flex-col items-center mx-auto max-w-2xl mb-20 md:mb-28">
+      <SectionHeader
+        title={project.title}
+        description={project.description}
+        url={project.projectUrl}
+      />
+      <article id="project" className="px-6 md:px-16 ">
+        <div className="flex flex-col gap-6">
+          <Image
+            width={728}
+            height={486}
+            src={project.featureImage ?? "/images/project.jpg"}
+            alt={project.title}
+          />
+
+          <div className="flex gap-6 items-center justify-between text-zinc-600 dark:text-zinc-400">
+            <p>{project.role}</p>
+            <p>
+              {ArticleDateFormatter(project.startedAt)} -{" "}
+              {project.endedAt?.toDateString() || "Present"}
+            </p>
+          </div>
+
+          <p className=" text-zinc-600 dark:text-zinc-400">
+            {project.htmlContent}
+          </p>
+
           {session && (
-            <Link href={`/projects/${project.slug}/edit`}>Edit Project</Link>
+            <Link
+              className="flex gap-1 items-center text-fuchsia-800"
+              href={`/projects/${project.slug}/edit`}
+            >
+              <span>Edit Project</span>
+              <ChevronRight size={12} />
+            </Link>
           )}
-        </p>
-      </div>
-    </section>
+        </div>
+      </article>
+    </div>
   );
 }

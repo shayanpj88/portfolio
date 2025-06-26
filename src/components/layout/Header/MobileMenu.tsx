@@ -1,13 +1,25 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { icons } from "@/lib/icons";
 import NavLinks from "../NavLinks/NavLinks";
+import { Session } from "next-auth";
+import Link from "next/link";
+import { signOut } from "next-auth/react";
 
-export default function MobileMenu() {
+interface Props {
+  session: Session | null;
+}
+
+export default function MobileMenu({ session }: Props) {
   const CloseIcon = icons["close"];
   const MenuIcon = icons["menu"];
   // open mobile menu modal
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
+
+  function logOut() {
+    setMobileMenuIsOpen!(false);
+    signOut();
+  }
 
   return (
     <>
@@ -49,6 +61,27 @@ export default function MobileMenu() {
                 navMode="mobile"
                 setMobileMenuIsOpen={setMobileMenuIsOpen}
               />
+              {session ? (
+                <li className="mobile">
+                  <Link
+                    href="#"
+                    onClick={() => logOut()}
+                    className="block pb-2"
+                  >
+                    Logout
+                  </Link>
+                </li>
+              ) : (
+                <li className="mobile">
+                  <Link
+                    href="/auth/login"
+                    onClick={() => setMobileMenuIsOpen!(false)}
+                    className="block pb-2"
+                  >
+                    Sing in
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>

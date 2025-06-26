@@ -24,13 +24,6 @@ export default function EditArticleForm({ article, mode }: Props) {
     setFormData((prev) => ({ ...prev, featureImage: url }));
   };
 
-  // const handleChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
   // useCallback to prevent creating new handleChange function on every component render
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -73,64 +66,65 @@ export default function EditArticleForm({ article, mode }: Props) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 text-zinc-600 dark:text-zinc-400"
+      >
         {/* Title */}
         <div>
-          <label className="block font-medium">Title</label>
+          <label className="block font-medium mb-1">Title</label>
           <input
             name="title"
             type="text"
             value={formData.title ?? ""}
             onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
           />
           {errors.title && (
-            <p className="text-sm text-red-500">{errors.title}</p>
+            <p className="text-sm text-red-500 mt-1">{errors.title}</p>
           )}
         </div>
 
-        {/* description */}    
+        {/* Description */}
         <div>
-          <label className="block font-medium">Description</label>
+          <label className="block font-medium mb-1">Description</label>
           <textarea
             name="description"
             value={formData.description ?? ""}
             onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
-            rows={3}
-          />
-        </div>
-
-        {/* htmlContent */}
-        <div>
-          <label className="block font-medium">Content</label>
-          <textarea
-            name="htmlContent"
-            value={formData.htmlContent ?? ""}
-            onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
             rows={4}
           />
         </div>
 
-        {/* Image */}
+        {/* Content */}
         <div>
-          <label className="block font-medium">Feature Image</label>
+          <label className="block font-medium mb-1">Content</label>
+          <textarea
+            name="htmlContent"
+            value={formData.htmlContent ?? ""}
+            onChange={handleChange}
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
+            rows={6}
+          />
+        </div>
 
+        {/* Image */}
+        <div className="flex flex-col items-start">
+          <label className="block font-medium mb-2">Feature Image</label>
           {formData.featureImage && (
-            <div className="mb-2">
+            <div className="mb-3">
               <img
                 src={formData.featureImage}
                 alt="featureImage"
-                className="h-32 w-32 object-cover rounded-full"
+                className="h-32 w-32 object-cover rounded"
               />
             </div>
-          )}
-
+          )} 
           <button
             type="button"
             onClick={() => setShowModal(true)}
-            className="bg-blue-500 px-4 py-2 rounded text-white"
+            className=" px-2 py-2 rounded border-1"
           >
             Upload Image
           </button>
@@ -141,7 +135,7 @@ export default function EditArticleForm({ article, mode }: Props) {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="rounded bg-blue-600 px-6 py-2 text-white disabled:opacity-50"
+            className="rounded w-full md:w-1/3 px-6 py-2 mt-6 mb-6 bg-fuchsia-800 text-white disabled:opacity-50 transition hover:bg-fuchsia-900"
           >
             {status === "submitting" ? "Saving..." : "Save"}
           </button>

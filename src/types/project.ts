@@ -6,6 +6,7 @@ export type ProjectForm = Omit<PrismaProject, "createdAt" | "updatedAt"> & {
   slug: string;
   description?: string;
   role: string;
+  projectUrl: string | null;
   startedAt: Date | null;
   endedAt: Date | null;
   htmlContent?: string;

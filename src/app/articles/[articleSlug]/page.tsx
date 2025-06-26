@@ -6,6 +6,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
 import { Metadata } from "next";
+import { ChevronRight } from "lucide-react";
+import { getUser } from "@/lib/prisma/user";
 
 //add dynamic metadata
 export async function generateMetadata({
@@ -13,29 +15,37 @@ export async function generateMetadata({
 }: {
   params: { articleSlug: string };
 }): Promise<Metadata> {
-  const article = await getArticle(params.articleSlug);
+  const { articleSlug } = await params;
+  const article = await getArticle(articleSlug);
 
   if (!article) {
     notFound();
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
   return {
-    title: article.title ?? "Article",
+    title: article.title || "Article",
     description:
       article.description ??
       article.htmlContent?.slice(0, 160) ??
       "Read this article.",
     openGraph: {
-      title: article.title,
+      title: article.title || "Article",
       description: article.description ?? article.htmlContent?.slice(0, 160),
-      images: article.featureImage ? [article.featureImage] : [],
+      images: article.featureImage ? [`${siteUrl}${article.featureImage}`] : [],
       type: "article",
     },
   };
 }
 
-export default async function ArticlePage({ params }: any) {
-  const article = await getArticle(params.articleSlug);
+export default async function ArticlePage({
+  params,
+}: {
+  params: { articleSlug: string };
+}) {
+  const { articleSlug } = await params;
+  const article = await getArticle(articleSlug);
 
   if (!article) {
     notFound();
@@ -47,25 +57,35 @@ export default async function ArticlePage({ params }: any) {
   article.htmlContent = article?.htmlContent.replace(/\n/g, "<br />");
 
   return (
-    <section id="about" className="px-6 md:px-16 md:py-6">
-      <SectionHeader title={article.title} />
-      <div className="flex flex-col gap-6">
-        <Image
-          width={728}
-          height={486}
-          src={article.featureImage || "/iamges/article.jpg"}
-          alt={article.title}
-        />
-        <p className=" text-zinc-600 dark:text-zinc-400">
-          {article.htmlContent}
-        </p>
-        <p className=" flex gap-3  text-zinc-600 dark:text-zinc-400">
-          <span>{article.createdAt.toDateString()} </span>
+    <div className="flex flex-col items-center mx-auto max-w-2xl mb-20 md:mb-28">
+      <SectionHeader
+        title={article.title}
+        description={article.description}
+        date={article.createdAt}
+      />
+      <article id="article" className="px-6 md:px-16 ">
+        <div className="flex flex-col gap-6">
+          <Image
+            width={728}
+            height={486}
+            src={article.featureImage || "/images/article.jpg"}
+            alt={article.title}
+          />
+          <p className=" text-zinc-600 dark:text-zinc-400">
+            {article.htmlContent}
+          </p>
+
           {session && (
-            <Link href={`/articles/${article.slug}/edit`}>Edit Article</Link>
+            <Link
+              className="flex gap-1 items-center text-fuchsia-800"
+              href={`/articles/${article.slug}/edit`}
+            >
+              <span>Edit Article</span>
+              <ChevronRight size={12} />
+            </Link>
           )}
-        </p>
-      </div>
-    </section>
+        </div>
+      </article>
+    </div>
   );
 }

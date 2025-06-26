@@ -12,8 +12,8 @@ export const metaMap: Record<string, PageMeta> = {
   },
   "/articles": {
     title: "Articles",
-    pageTitle: "Articles Page",
-    pageDescription: "Discover my latest articles and writings.",
+    pageTitle: "Writing on software design, company building, and art.",
+    pageDescription: "All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order.",
   },
   "/projects": {
     title: "Projects",
@@ -22,7 +22,7 @@ export const metaMap: Record<string, PageMeta> = {
   },
   "/about": {
     title: "About",
-    pageTitle: "About Me",
+    pageTitle: "About",
     pageDescription: "Learn more about me and my work.",
   },
 };

@@ -66,50 +66,55 @@ export default function EditProjectForm({ project, mode }: Props) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 text-zinc-600 dark:text-zinc-400"
+      >
         {/* Title */}
         <div>
-          <label className="block font-medium">Title</label>
+          <label className="block font-medium mb-1">Title</label>
           <input
             name="title"
             type="text"
             value={formData.title ?? ""}
             onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
           />
           {errors.title && (
-            <p className="text-sm text-red-500">{errors.title}</p>
+            <p className="text-sm text-red-500 mt-1">{errors.title}</p>
           )}
         </div>
 
         {/* Description */}
         <div>
-          <label className="block font-medium">Description</label>
+          <label className="block font-medium mb-1">Description</label>
           <textarea
             name="description"
             value={formData.description ?? ""}
             onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
             rows={3}
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
           />
         </div>
 
         {/* Role */}
         <div>
-          <label className="block font-medium">Role</label>
+          <label className="block font-medium mb-1">Role</label>
           <input
             name="role"
             type="text"
             value={formData.role ?? ""}
             onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
           />
-          {errors.role && <p className="text-sm text-red-500">{errors.role}</p>}
+          {errors.role && (
+            <p className="text-sm text-red-500 mt-1">{errors.role}</p>
+          )}
         </div>
 
-        {/* StartAt */}
+        {/* StartedAt */}
         <div>
-          <label className="block font-medium">Started date</label>
+          <label className="block font-medium mb-1">Started date</label>
           <input
             name="startedAt"
             type="date"
@@ -119,16 +124,16 @@ export default function EditProjectForm({ project, mode }: Props) {
                 : ""
             }
             onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
           />
           {errors.startedAt && (
-            <p className="text-sm text-red-500">{errors.startedAt}</p>
+            <p className="text-sm text-red-500 mt-1">{errors.startedAt}</p>
           )}
         </div>
 
         {/* EndedAt */}
         <div>
-          <label className="block font-medium">Ended date</label>
+          <label className="block font-medium mb-1">Ended date</label>
           <input
             name="endedAt"
             type="date"
@@ -138,58 +143,71 @@ export default function EditProjectForm({ project, mode }: Props) {
                 : ""
             }
             onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
           />
           {errors.endedAt && (
-            <p className="text-sm text-red-500">{errors.endedAt}</p>
+            <p className="text-sm text-red-500 mt-1">{errors.endedAt}</p>
           )}
         </div>
 
-        {/* htmlContent */}
+        {/* Project Url */}
         <div>
-          <label className="block font-medium">Content</label>
+          <label className="block font-medium mb-1">Project Url</label>
+          <input
+            name="projectUrl"
+            type="text"
+            value={formData.projectUrl ?? ""}
+            onChange={handleChange}
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
+          />
+          {errors.projectUrl && (
+            <p className="text-sm text-red-500 mt-1">{errors.projectUrl}</p>
+          )}
+        </div>
+
+        {/* Content */}
+        <div>
+          <label className="block font-medium mb-1">Content</label>
           <textarea
             name="htmlContent"
             value={formData.htmlContent ?? ""}
             onChange={handleChange}
-            className="mt-1 w-full rounded border px-3 py-2"
             rows={4}
+            className="mt-1 w-full rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-fuchsia-800"
           />
         </div>
 
-        {/* Image */}
-        <div>
-          <label className="block font-medium">Feature Image</label>
-
+        {/* Feature Image */}
+        <div className="flex flex-col items-start">
+          <label className="block font-medium mb-2">Feature Image</label>
           {formData.featureImage && (
-            <div className="mb-2">
+            <div className="mb-3">
               <img
                 src={formData.featureImage}
                 alt="featureImage"
-                className="h-32 w-32 object-cover rounded-full"
+                className="h-32 w-32 object-cover rounded"
               />
             </div>
           )}
-
           <button
             type="button"
             onClick={() => setShowModal(true)}
-            className="bg-blue-500 px-4 py-2 rounded text-white"
+            className="px-4 py-2 rounded border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 hover:ring-2 hover:ring-fuchsia-800 transition"
           >
             Upload Image
           </button>
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <div>
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="rounded bg-blue-600 px-6 py-2 text-white disabled:opacity-50"
+            className="rounded w-full md:w-1/3 px-6 py-2 mt-6 mb-6 bg-fuchsia-800 text-white disabled:opacity-50 transition hover:bg-fuchsia-900"
           >
             {status === "submitting" ? "Saving..." : "Save"}
           </button>
-          {(status === "success" || isCreated === true) && (
+          {(status === "success" || isCreated) && (
             <p className="mt-2 text-green-500">Project saved successfully!</p>
           )}
           {status === "error" && (

@@ -7,26 +7,34 @@ body {
   font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  @apply min-h-full;
+ 
 }
 
 body {
   @apply bg-zinc-50 dark:bg-black;
 }
 
-.main-header a:hover , .main-header button:hover {
+.main-header a:hover,
+.main-header button:hover {
   @apply text-fuchsia-800;
   cursor: pointer;
 }
 
+.main-header ul li.mobile a:hover {
+  color: inherit;  
+}
+
 h1 {
-  @apply  md:leading-tight;
+  @apply md:leading-tight;
 }
 
 p {
   @apply leading-relaxed md:leading-loose;
 }
 .root-container {
-  @apply container mx-auto w-full md:max-w-6xl ring-1 ring-zinc-100 dark:ring-zinc-300/20 bg-white dark:bg-zinc-900;
+  @apply container flex flex-col mx-auto w-full md:max-w-5xl ring-1 ring-zinc-100 dark:ring-zinc-300/20 bg-white dark:bg-zinc-900;
+   @apply min-h-screen;
 }
 
 .main-header .mobile-button {

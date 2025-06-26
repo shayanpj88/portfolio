@@ -51,6 +51,7 @@ model Project {
   description  String?
   htmlContent  String
   featureImage String?
+  projectUrl   String?
 
   startedAt DateTime?
   endedAt   DateTime?

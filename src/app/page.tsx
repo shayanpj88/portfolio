@@ -3,34 +3,7 @@ import ArticleSection from "@/components/home/ArticleSection";
 import ProjectSection from "@/components/home/ProjectSection";
 import StayUpdateSection from "@/components/home/StayUpdateSection";
 import ImagesGallerySection from "@/components/home/ImagesGallerySection";
-import type { Metadata } from "next";
-import { getUser } from "@/lib/prisma/user";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const user = await getUser();
-
-  if (!user) {
-    return {
-      title: "Home Page | My Portfolio",
-      description: "This is my portfolio.",
-    };
-  }
-
-  const siteUrl = process.env.NEXR_PUBLIC_SITE_URL || "";
-
-  return {
-    title: `${user.firstName} ${user.lastName} Portfolio`,
-    description: user.introductionTitle ?? "",
-
-    openGraph: {
-      title: `${user.firstName} ${user.lastName} Portfolio`,
-      description: user.introductionTitle ?? "",
-      url: `${siteUrl}`,
-      siteName: "My Site",
-      images: [{ url: `${user.profileImage}` }],
-    },
-  };
-}
 
 export default async function HomePage() {
   return (
