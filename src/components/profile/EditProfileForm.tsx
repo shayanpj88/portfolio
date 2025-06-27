@@ -178,11 +178,12 @@ export default function EditProfileForm({ user }: Props) {
         <div className="flex flex-col items-start">
           <label className="block font-medium mb-2">Profile Image</label>
           {formData.profileImage && (
-            <div className="mb-3 h-34 w-34 relative ">
+            <div className="mb-3 h-34 w-34 relative">
               <Image
                 src={formData.profileImage}
-                alt="profile image"
+                alt="Profile image"
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover rounded"
               />
             </div>

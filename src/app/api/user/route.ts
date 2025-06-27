@@ -17,7 +17,8 @@ export async function PUT(req: NextRequest) {
       data: {
         firstName: body.firstName,
         lastName: body.lastName,
-        username: body.username,
+        username: body.username ?? null,
+        email: body.email ?? null,
         bio: body.bio ?? null,
         introductionTitle: body.introductionTitle ?? null,
         introductionSummary: body.introductionSummary ?? null,

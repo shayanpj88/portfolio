@@ -11,7 +11,7 @@ export default async function ArticleSection() {
       {articles.map((article) => (
         <article
           key={article.id}
-          className="flex flex-col hover:bg-zinc-50 dark:hover:bg-zinc-800 p-6 rounded-2xl"
+          className="flex flex-col hover:bg-zinc-50 dark:hover:bg-zinc-800/50 p-6 rounded-2xl transition"
         >
           <Link href={`articles/${article?.slug}`} className="flex flex-col">
             <p className="border-l-1 order-first flex items-center text-sm text-zinc-400 pl-3.5">
@@ -25,7 +25,7 @@ export default async function ArticleSection() {
               {article?.title}
             </h2>
             <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-400 ">
-              {article?.htmlContent}
+              {article?.description}
             </p>
             <div className="mt-4 flex items-center text-sm gap-2 font-medium text-fuchsia-800 ">
               <p>Read article </p>

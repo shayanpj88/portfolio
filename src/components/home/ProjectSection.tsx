@@ -4,7 +4,7 @@ import { getProjects } from "@/lib/prisma/project";
 import Image from "next/image";
 
 export default async function ProjectSection() {
-  const projects = await getProjects(2);
+  const projects = await getProjects(3);
   const WorkIcon = icons["luggage"];
   const ArrowDown = icons["arrowDown"];
   return (
@@ -46,16 +46,19 @@ export default async function ProjectSection() {
                     ? new Date(project.endedAt).toLocaleDateString("en-US", {
                         year: "numeric",
                       })
-                    : "Until present"}
+                    : "Present"}
                 </time>
               </dd>
             </dl>
           </li>
         ))}
       </ol>
-      <a className="inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none bg-zinc-50 font-medium text-zinc-900 hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70 group mt-6 w-full">
+      <Link
+        href="/uploads/Shayan Panjeh Alizadeh - Resume.pdf"
+        className="inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none bg-zinc-50 font-medium text-zinc-900 hover:bg-zinc-100 active:bg-zinc-100 active:text-zinc-900/60 dark:bg-zinc-800/50 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:active:bg-zinc-800/50 dark:active:text-zinc-50/70 group mt-6 w-full"
+      >
         Download CV <ArrowDown size={14} />
-      </a>
+      </Link>
     </div>
   );
 }

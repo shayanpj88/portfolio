@@ -40,7 +40,7 @@ export default function ImageUploadModal({ onClose, onUploadComplete }: Props) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded shadow-md">
-        <h2 className="text-lg font-semibold mb-4">Upload Profile Image</h2>
+        <h2 className="text-lg font-semibold mb-4">Upload Image</h2>
         <input type="file" accept="image/*" onChange={handleFileChange} />
         {uploading && <p className="mt-2 text-blue-500">Uploading...</p>}
         {error && <p className="mt-2 text-red-500">{error}</p>}

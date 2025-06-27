@@ -12,16 +12,13 @@ export default function About({ aboutData }: Props) {
   const GithubIcon = icons["github"];
   const LinkedinIcon = icons["linkedin"];
 
-  // replace line break with html <br/> using regular expression
-  about.bio = about?.bio.replace(/\n/g, "<br />");
-
   return (
     <div className="flex flex-col md:justify-between md:flex-row">
       <div className="flex gap-6 mb-16 flex-col md:w-1/2">
         <div className=" mb-6 md:hidden">
           <div className="max-w-xs px-2.5 lg:max-w-none">
             <Image
-              src={about?.profileImage ?? "/images.avatar.jpg"}
+              src={"/images/about.jpg"}
               width={800}
               height={800}
               alt={about?.firstName + " " + about?.lastName}
@@ -29,10 +26,9 @@ export default function About({ aboutData }: Props) {
             />
           </div>
         </div>
-        <p
-          className="text-base text-zinc-600 dark:text-zinc-400"
-          dangerouslySetInnerHTML={{ __html: about.bio }}
-        ></p>
+        <p className="whitespace-pre-line text-base text-zinc-600 dark:text-zinc-400">
+          {about.bio}
+        </p>
         <div className="flex flex-row gap-6 md:hidden">
           {about.social?.instagram && (
             <a
@@ -70,7 +66,7 @@ export default function About({ aboutData }: Props) {
         <div className="mb-6">
           <div className="max-w-xs px-2.5 lg:max-w-none">
             <Image
-              src={about?.profileImage ?? "/images.avatar.jpg"}
+              src={"/images/about.jpg"}
               width={800}
               height={800}
               alt={about?.firstName + " " + about?.lastName}

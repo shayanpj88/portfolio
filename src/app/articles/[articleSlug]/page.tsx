@@ -9,11 +9,13 @@ import { Metadata } from "next";
 import { ChevronRight } from "lucide-react";
 
 interface PageProps {
-  params: Promise<{ articleSlug: string }>; 
+  params: Promise<{ articleSlug: string }>;
 }
 
 //add dynamic metadata
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { articleSlug } = await params;
   const article = await getArticle(articleSlug);
 
@@ -48,9 +50,6 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const session = await getServerSession(authOptions);
 
-  // replace line break with html <br/> using regular expression
-  article.htmlContent = article?.htmlContent.replace(/\n/g, "<br />");
-
   return (
     <div className="flex flex-col items-center mx-auto max-w-2xl mb-20 md:mb-28">
       <SectionHeader
@@ -66,7 +65,7 @@ export default async function ArticlePage({ params }: PageProps) {
             src={article.featureImage || "/images/article.jpg"}
             alt={article.title}
           />
-          <p className=" text-zinc-600 dark:text-zinc-400">
+          <p className="whitespace-pre-line text-zinc-600 dark:text-zinc-400">
             {article.htmlContent}
           </p>
 

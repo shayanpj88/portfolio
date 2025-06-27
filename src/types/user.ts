@@ -1,5 +1,4 @@
-import { PrismaUser } from "./prisma"; 
-
+import { PrismaUser } from "./prisma";
 
 export type UserForm = Omit<
   PrismaUser,
@@ -18,7 +17,13 @@ export type UserForm = Omit<
 
 export type AboutData = Omit<
   PrismaUser,
-  "createdAt" | "updatedAt" | "password" | "id" | "introductionTitle" | "introductionSummary" | "username"
+  | "createdAt"
+  | "updatedAt"
+  | "password"
+  | "id"
+  | "introductionTitle"
+  | "introductionSummary"
+  | "username"
 > & {
   email?: string;
   bio?: string;
@@ -29,5 +34,3 @@ export type AboutData = Omit<
     github?: string;
   };
 };
-
-

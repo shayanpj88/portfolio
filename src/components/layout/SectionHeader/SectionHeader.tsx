@@ -1,6 +1,5 @@
 import { ArticleDateFormatter } from "@/util/DateFormatter";
 import { Link2 } from "lucide-react";
-import Link from "next/link";
 
 interface Props {
   title: string | null;
@@ -32,13 +31,13 @@ export default function SectionHeader({
         {title}
       </h1>
       {url && (
-        <Link
-          href={url}
+        <a
+          href={url.startsWith("http") ? url : `https://${url}`}
           className=" mb-6 mt-6 flex items-center text-base text-zinc-600 dark:text-zinc-400 hover:text-fuchsia-800"
         >
-          <Link2/>
+          <Link2 />
           <span className="ml-3">{url}</span>
-        </Link>
+        </a>
       )}
       <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
         {description}

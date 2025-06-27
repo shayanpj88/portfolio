@@ -11,7 +11,7 @@ import { ArticleDateFormatter } from "@/util/DateFormatter";
 
 interface Props {
   params: Promise<{ projectSlug: string }>;
-} 
+}
 
 //add dynamic metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -46,9 +46,6 @@ export default async function ProjectPage({ params }: Props) {
   }
   const session = await getServerSession(authOptions);
 
-  // replace line break with html <br/> using regular expression
-  project.htmlContent = project?.htmlContent.replace(/\n/g, "<br />");
-
   return (
     <div className="flex flex-col items-center mx-auto max-w-2xl mb-20 md:mb-28">
       <SectionHeader
@@ -73,7 +70,7 @@ export default async function ProjectPage({ params }: Props) {
             </p>
           </div>
 
-          <p className=" text-zinc-600 dark:text-zinc-400">
+          <p className="whitespace-pre-line text-zinc-600 dark:text-zinc-400">
             {project.htmlContent}
           </p>
 

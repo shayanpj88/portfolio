@@ -23,7 +23,7 @@ export default function MobileMenu({ session }: Props) {
 
   return (
     <>
-      <div className=" flex md:hidden space-x-3 justify-end">
+      <div className=" flex md:hidden space-x-3 justify-end ">
         <button
           onClick={() => setMobileMenuIsOpen(true)}
           className="mobile-button"
@@ -37,9 +37,9 @@ export default function MobileMenu({ session }: Props) {
           onClick={() => setMobileMenuIsOpen(false)}
           className="flex fixed inset-0 bg-black/30 backdrop-blur-sm z-50 pt-6 justify-center items-start"
         >
-          {/* Modal Box */}
+          {/* Modal Box with Animation */}
           <div
-            className="flex flex-col gap-6 w-11/12 backdrop-blur-sm p-8 justify-center rounded-3xl bg-white ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800"
+            className="flex flex-col gap-6 w-11/12 backdrop-blur-sm p-8 justify-center rounded-3xl bg-white ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800 transform transition duration-300 ease-out scale-95 opacity-0 animate-fadeIn"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center w-full">
@@ -47,7 +47,6 @@ export default function MobileMenu({ session }: Props) {
                 Navigations
               </h2>
 
-              {/* Close Button */}
               <button
                 className="h-6 w-6 text-zinc-500 dark:text-zinc-400"
                 onClick={() => setMobileMenuIsOpen(false)}
@@ -78,7 +77,7 @@ export default function MobileMenu({ session }: Props) {
                     onClick={() => setMobileMenuIsOpen!(false)}
                     className="block pb-2"
                   >
-                    Sing in
+                    Sign in
                   </Link>
                 </li>
               )}
