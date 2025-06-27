@@ -5,7 +5,7 @@ import Link from "next/link";
 import { LinkIcon, Plus } from "lucide-react";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export default async function ProjectsPage() {
   const projects = await getProjects(10);

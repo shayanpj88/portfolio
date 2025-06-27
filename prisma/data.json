@@ -1,4 +1,4 @@
-module.exports = {
+{
   "users": [
     {
       "id": "cmbpl7pa10000w41sijiw9igk",
@@ -76,4 +76,4 @@ module.exports = {
       "updatedAt": "2025-06-26T14:46:30.174Z"
     }
   ]
-};
+}

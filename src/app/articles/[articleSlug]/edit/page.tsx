@@ -1,20 +1,19 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import { getArticle } from "@/lib/prisma/article";
 import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
 import EditArticleForm from "@/components/article/EditArticleForm";
 
-interface Props {
-  params: { articleSlug: string };
+interface PageProps {
+  params: Promise<{ articleSlug: string }>; 
 }
 
-export default async function ArticleEditPage({ params }: Props) {
+export default async function ArticleEditPage({ params }: PageProps) {
   const session = await getServerSession(authOptions);
 
-  // secure redirect if not logged in
   if (!session) {
-    redirect("auth/login");
+    redirect("/auth/login");
   }
 
   const { articleSlug } = await params;

@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import { getProject } from "@/lib/prisma/project";
 import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
 import EditProjectForm from "@/components/project/EditProjectForm";
 
 interface Props {
-  params: { projectSlug: string };
+  params: Promise<{ projectSlug: string }>;
 } 
 
 export default async function ProjectEditPage({ params }: Props) {

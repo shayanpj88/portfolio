@@ -6,6 +6,7 @@ import { FormStatus, FormErrors } from "@/types/forms";
 import { ProjectForm } from "@/types/project";
 import createSlug from "@/util/createSlug";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 interface Props {
   project: ProjectForm;
@@ -16,7 +17,7 @@ export default function EditProjectForm({ project, mode }: Props) {
   const [formData, setFormData] = useState<ProjectForm>(project);
   const [errors, setErrors] = useState<FormErrors<ProjectForm>>({});
   const [status, setStatus] = useState<FormStatus>("idle");
-  const [showModal, setShowModal] = useState<Boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const isCreated = searchParams.get("created") === "true";
 
@@ -32,7 +33,7 @@ export default function EditProjectForm({ project, mode }: Props) {
     []
   );
 
-  function validate(): Boolean {
+  function validate(): boolean {
     const newErrors: FormErrors<ProjectForm> = {};
     if (!formData.title?.trim()) newErrors.title = "Title is required";
     setErrors(newErrors);
@@ -181,11 +182,12 @@ export default function EditProjectForm({ project, mode }: Props) {
         <div className="flex flex-col items-start">
           <label className="block font-medium mb-2">Feature Image</label>
           {formData.featureImage && (
-            <div className="mb-3">
-              <img
+            <div className="mb-3 h-34 w-34 relative ">
+              <Image
                 src={formData.featureImage}
                 alt="featureImage"
-                className="h-32 w-32 object-cover rounded"
+                fill
+                className="object-cover rounded"
               />
             </div>
           )}

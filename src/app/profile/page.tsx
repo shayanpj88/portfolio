@@ -1,9 +1,9 @@
 import EditProfileForm from "@/components/profile/EditProfileForm";
-import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
+import { getUser } from "@/lib/prisma/user";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
@@ -12,9 +12,7 @@ export default async function ProfilePage() {
     redirect("/auth/login");
   }
 
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
-  });
+  const user = await getUser();
 
   if (!user) {
     notFound();
@@ -25,7 +23,7 @@ export default async function ProfilePage() {
     firstName: user.firstName ?? "",
     lastName: user.lastName ?? "",
     username: user.username ?? "",
-    email: user.email,
+    email: user.email ?? "",
     bio: user.bio ?? "",
     introductionTitle: user.introductionTitle ?? "",
     introductionSummary: user.introductionSummary ?? "",

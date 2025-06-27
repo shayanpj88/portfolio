@@ -1,16 +1,15 @@
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { notFound, redirect } from "next/navigation";
-import { getArticle } from "@/lib/prisma/article";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
 import EditArticleForm from "@/components/article/EditArticleForm";
 
-export default async function ArticleEditPage({ params }: any) {
+export default async function ArticleEditPage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/login"); // secure redirect if not logged in
+    redirect("/auth/login"); // secure redirect if not logged in
   }
 
   const articleFormData = {

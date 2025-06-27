@@ -4,7 +4,7 @@ import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
 import Link from "next/link";
 import { ArticleDateFormatter } from "../../util/DateFormatter";
 import { ChevronRight, Plus } from "lucide-react";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
 export default async function ArticlesPage() {

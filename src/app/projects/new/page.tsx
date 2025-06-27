@@ -1,15 +1,12 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { getProject } from "@/lib/prisma/project";
 import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
 import EditProjectForm from "@/components/project/EditProjectForm";
 
-interface Props {
-  params: { projectSlug: string };
-}
 
-export default async function ArticleEditPage({ params }: Props) {
+
+export default async function ArticleEditPage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {

@@ -36,13 +36,13 @@ export const generateMetadata = async (): Promise<Metadata> => {
     },
     icons: {
       icon: [
-        { url: "favicon/favicon.ico" },
-        { url: "favicon/icon.svg", type: "image/svg+xml" },
-        { url: "favicon/favicon-96x96.png", sizes: "96x96" },
-        { url: "favicon/web-app-manifest-192x192.png", sizes: "192x192" },
-        { url: "favicon/web-app-manifest-512x512.png", sizes: "512x512" },
+        { url: "/favicon/favicon.ico" },
+        { url: "/favicon/icon.svg", type: "image/svg+xml" },
+        { url: "/favicon/favicon-96x96.png", sizes: "96x96" },
+        { url: "/favicon/web-app-manifest-192x192.png", sizes: "192x192" },
+        { url: "/favicon/web-app-manifest-512x512.png", sizes: "512x512" },
       ],
-      apple: [{ url: "favicon/apple-touch-icon.png" }],
+      apple: [{ url: "/favicon/apple-touch-icon.png" }],
       other: [{ rel: "mask-icon", url: "favicon/icon.svg", color: "#5bbad5" }],
     },
   };

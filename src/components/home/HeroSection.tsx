@@ -1,6 +1,6 @@
 import { getUser } from "@/lib/prisma/user";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import Image from "next/image";
 import { icons } from "@/lib/icons";
 import { UserForm } from "@/types/user";

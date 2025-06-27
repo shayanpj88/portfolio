@@ -3,18 +3,17 @@ import { getArticle } from "@/lib/prisma/article";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import { Metadata } from "next";
 import { ChevronRight } from "lucide-react";
-import { getUser } from "@/lib/prisma/user";
+
+interface PageProps {
+  params: Promise<{ articleSlug: string }>; 
+}
 
 //add dynamic metadata
-export async function generateMetadata({
-  params,
-}: {
-  params: { articleSlug: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { articleSlug } = await params;
   const article = await getArticle(articleSlug);
 
@@ -39,11 +38,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ArticlePage({
-  params,
-}: {
-  params: { articleSlug: string };
-}) {
+export default async function ArticlePage({ params }: PageProps) {
   const { articleSlug } = await params;
   const article = await getArticle(articleSlug);
 

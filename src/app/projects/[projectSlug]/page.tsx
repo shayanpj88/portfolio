@@ -2,15 +2,19 @@ import SectionHeader from "@/components/layout/SectionHeader/SectionHeader";
 import { getProject } from "@/lib/prisma/project";
 import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import { ChevronRight } from "lucide-react";
 import { ArticleDateFormatter } from "@/util/DateFormatter";
 
+interface Props {
+  params: Promise<{ projectSlug: string }>;
+} 
+
 //add dynamic metadata
-export async function generateMetadata({ params }: any): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { projectSlug } = await params;
   const project = await getProject(projectSlug);
 
@@ -33,11 +37,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   };
 }
 
-export default async function ProjectPage({
-  params,
-}: {
-  params: { projectSlug: string };
-}) {
+export default async function ProjectPage({ params }: Props) {
   const { projectSlug } = await params;
   const project = await getProject(projectSlug);
 

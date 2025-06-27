@@ -4,7 +4,7 @@ import MobileMenuProfileImage from "./MobileProfileImage";
 import { getUser } from "@/lib/prisma/user";
 import DesktopMenu from "./DesktopMenu";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import DesktopMenuProfileImage from "./DesktopProfileImage";
 
 export default async function Header() {
