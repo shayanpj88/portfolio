@@ -1,4 +1,4 @@
-import "@/styels/globals.css";
+import "@/styles/globals.css";
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import { Metadata } from "next";
@@ -8,6 +8,7 @@ export const viewport = {
   themeColor: "black",
   width: "device-width",
   initialScale: 1,
+  userScalable: false,
 };
 
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -28,7 +29,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
     description: user.introductionTitle ?? "",
 
     openGraph: {
-      title: `${user.firstName} ${user.lastName} Portfolio`,
+      title: `${user.firstName} ${user.lastName} - Portfolio`,
       description: user.introductionTitle ?? "",
       url: `${siteUrl}`,
       siteName: "My Site",
